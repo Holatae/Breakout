@@ -7,10 +7,9 @@ namespace ConsoleApplication
         static void Main(string[] args)
         {
             Console.CursorVisible = false;
-            Stage stage = new Stage();
-            stage.Draw();
             MyProgram myProgram;
             myProgram = new MyProgram();
+            myProgram.Draw();
             myProgram.Run();
             
         }
