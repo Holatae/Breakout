@@ -2,22 +2,24 @@
 
 public class Stage
 {
+    int stageLengthX = 15;
+    int stageLengthY = 19;
     public void Draw()
     {
         int x = 0;
         int y = 0;
         //Left wall
-        for(int i = 0; i < 20; i++)
+        for(int i = 0; i < stageLengthY; i++)
         {
             Console.WriteLine("@");
             y += 1;
             Console.SetCursorPosition(x, y);
         }
         y = 0;
-        x = 20;
+        x = stageLengthX;
         //Right wall
         Console.SetCursorPosition(x, y);
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < stageLengthY; i++)
         {
             Console.WriteLine("@");
             y += 1;
@@ -29,7 +31,7 @@ public class Stage
         x = 1;
         //Floor
         Console.SetCursorPosition(x, y);
-       for (int i = 0; i < 19; i++)
+       for (int i = 0; i < stageLengthX - 1; i++)
         {
             Console.WriteLine("-");
             x += 1;
@@ -40,7 +42,7 @@ public class Stage
         x = 1;
         //Roof
         Console.SetCursorPosition(x, y);
-        for (int i = 0; i < 19; i++)
+        for (int i = 0; i < stageLengthX - 1; i++)
         {
             Console.WriteLine("-");
             x += 1;
