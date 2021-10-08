@@ -2,8 +2,8 @@
 
 public class MyProgram
 {
-    private int x = 1;
-    private int y = 1;
+    private int posX = 1;
+    private int posY = 1;
 
     int stageLength = 15;
     int stageHight = 19;
@@ -22,15 +22,15 @@ public class MyProgram
 
     void Forward()
     {
-        while (x <= stageLength || y <= stageHight)
+        while (posX <= stageLength || posY <= stageHight)
         {
-            Console.SetCursorPosition(x, y);
-            x += 1;
-            y += 1;
-            Console.SetCursorPosition(x, y - 1);
+            Console.SetCursorPosition(posX, posY);
+            posX += 1;
+            posY += 1;
+            Console.SetCursorPosition(posX, posY - 1);
             Console.Write("@");
             System.Threading.Thread.Sleep(200);
-            Console.SetCursorPosition(x - 1, y - 1);
+            Console.SetCursorPosition(posX - 1, posY - 1);
             Console.Write("  ");
         }
         //for (int i = 0; i < stageLength; i++)
@@ -51,22 +51,23 @@ public class MyProgram
     {
         for (int i = 0; i < stageLength; i++)
         {
-            Console.SetCursorPosition(x, y);
+            Console.SetCursorPosition(posX, posY);
             Console.Write("");
-            x -= 1;
-            y -= 1;
+            posX -= 1;
+            posY -= 1;
             Console.Write("@");
             System.Threading.Thread.Sleep(200);
-            Console.SetCursorPosition(x + 1, y + 1);
+            Console.SetCursorPosition(posX + 1, posY + 1);
             Console.Write(" ");
         }
     }
 
     public void Draw()
     {
+        
         //XY === HÄR
-        y = 0;
-        x = stageLength;
+        int x = stageLength;
+        int y = 0;
         //Right wall
         Console.SetCursorPosition(x, y);
         for (int i = 0; i < stageHight; i++)
