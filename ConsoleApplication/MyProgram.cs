@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace ConsoleApplication
 {
@@ -7,13 +8,16 @@ namespace ConsoleApplication
         private int _posX = 1;
         private int _posY = 1;
 
-        private const int StageLength = 15;
+        private const int StageWidth = 15;
         private const int StageHeight = 19;
 
         bool isRunning = true;
         public void Run()
         {
             Draw();
+            Player player = new Player(StageWidth, StageHeight);
+            Thread playerThread = new Thread(() => player.InputChecker());
+            playerThread.Start();
             while(isRunning)
             {
                 MoveBall();
@@ -33,7 +37,7 @@ namespace ConsoleApplication
                 //Check which direction the ball is going
                 #region CheckDirection
 
-                if (_posX == StageLength - 1)
+                if (_posX == StageWidth - 1)
                 {
                     tempX = -1;
                 }
@@ -123,7 +127,7 @@ namespace ConsoleApplication
         {
         
             //XY === HÄR
-            int x = StageLength;
+            int x = StageWidth;
             int y = 0;
             //Right wall
             Console.SetCursorPosition(x, y);
@@ -146,22 +150,27 @@ namespace ConsoleApplication
                 Console.SetCursorPosition(x, y);
             }
 
-            y = StageHeight - 1;
-            x = 1;
-            //Floor
-            Console.SetCursorPosition(x, y);
-            for (int i = 0; i < StageLength - 1; i++)
-            {
-                Console.WriteLine("-");
-                x += 1;
-                Console.SetCursorPosition(x, y);
-            }
+            // y = StageHeight - 1;
+            // x = 1;
+            // //Floor
+            // Console.SetCursorPosition(x, y);
+            // for (int i = 0; i < StageWidth - 1; i++)
+            // {
+            //     Console.WriteLine("-");
+            //     x += 1;
+            //     Console.SetCursorPosition(x, y);
+            // }
+            
+            //Draw player
+            Console.SetCursorPosition(StageWidth / 2 + 1, StageHeight - 1);
+            Console.Write("-");
+            Console.SetCursorPosition(StageWidth / 2 + 1, StageHeight - 1);
 
             y = 0;
             x = 1;
             //Roof
             Console.SetCursorPosition(x, y);
-            for (int i = 0; i < StageLength - 1; i++)
+            for (int i = 0; i < StageWidth - 1; i++)
             {
                 Console.WriteLine("-");
                 x += 1;
