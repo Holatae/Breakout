@@ -123,8 +123,8 @@ namespace ConsoleApplication
         {
         
             //XY === HÄR
-            var x = StageLength;
-            var y = 0;
+            int x = StageLength;
+            int y = 0;
             //Right wall
             Console.SetCursorPosition(x, y);
             for (int i = 0; i < StageHeight; i++)
