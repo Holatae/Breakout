@@ -7,8 +7,7 @@ namespace ConsoleApplication
         static void Main(string[] args)
         {
             Console.CursorVisible = false;
-            MyProgram myProgram;
-            myProgram = new MyProgram();
+            MyProgram myProgram = new MyProgram();
             myProgram.Run();
             
         }
