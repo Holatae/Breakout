@@ -12,10 +12,10 @@ namespace ConsoleApplication
         private const int StageHeight = 19;
 
         bool isRunning = true;
+        Player player = new Player(StageWidth, StageHeight);
         public void Run()
         {
             Draw();
-            Player player = new Player(StageWidth, StageHeight);
             Thread playerThread = new Thread(() => player.InputChecker());
             playerThread.Start();
             while(isRunning)
@@ -48,9 +48,12 @@ namespace ConsoleApplication
                 
                 //TODO REMEMBER THAT 2 SHOULD BE 1 IN THE FUTURE
                 
-                if (_posY == StageHeight - 2)
+                if (_posY == StageHeight - 1)
                 {
-                    tempY = -1;
+                    if (player.posX == _posX)
+                    {
+                        tempY = -1;
+                    }
                 }
                 else if(_posY == 1)
                 {
