@@ -59,6 +59,14 @@ namespace ConsoleApplication
                 {
                     tempY = 1;
                 }
+
+                if (_posY > StageHeight + 2)
+                {
+                    tempY = 1;
+                    tempX = 1;
+                    _posX = 1;
+                    _posY = 1;
+                }
                 #endregion
             
                 //If going right X is 1 and left -1. From CheckDirection
