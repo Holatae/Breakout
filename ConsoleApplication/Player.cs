@@ -23,6 +23,7 @@ namespace ConsoleApplication
             switch (direction)
             {
                 case 0:
+                    if(posX - 1 <= 0){break;}
                     Console.SetCursorPosition(posX, posY);
                     Console.Write(" ");
                     posX += -1;
@@ -30,6 +31,7 @@ namespace ConsoleApplication
                     Console.Write("-");
                     break;
                 case 1:
+                    if(posX + 1 >= stageWidth){break;}
                     Console.SetCursorPosition(posX, posY);
                     Console.Write(" ");
                     posX += 1;
@@ -39,6 +41,7 @@ namespace ConsoleApplication
             }
         }
 
+        //Checks for input
         public void InputChecker(bool isRunning = true)
         {
             while (isRunning)
