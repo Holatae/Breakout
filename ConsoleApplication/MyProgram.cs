@@ -5,8 +5,8 @@ public class MyProgram
     private int posX = 1;
     private int posY = 1;
 
-    int stageLength = 15;
-    int stageHight = 19;
+    readonly int stageLength = 15;
+    readonly int stageHight = 19;
 
     bool isRunning = true;
     public void Run()
@@ -14,13 +14,53 @@ public class MyProgram
         Draw();
         while(isRunning)
         {
-            Forward();
-            BackWards();
+            MoveBall();
+        }
+    }
+
+    void MoveBall()
+    {
+        bool isPlaying = true;
+
+        int tempX = 1;
+        int tempY = 1;
+        while (isPlaying)
+        {
+            Console.SetCursorPosition(posX, posY);
+
+            #region CheckDirection
+
+            if (posX == stageLength - 1)
+            {
+                tempX = -1;
+            }
+            else if(posX == 1)
+            {
+                tempX = 1;
+            }
+            
+            if (posY == stageHight - 1)
+            {
+                tempY = -1;
+            }
+            else if(posY == 1)
+            {
+                tempY = 1;
+            }
+            #endregion
+
+            posX += tempX;
+            posY += tempY;
+            Console.SetCursorPosition(posX, posY );
+            Console.Write("@");
+            System.Threading.Thread.Sleep(200);
+            Console.SetCursorPosition(posX, posY );
+            Console.Write(" ");
         }
     }
 
 
-    void Forward()
+    void GoingRight()
     {
         while (posX <= stageLength || posY <= stageHight)
         {
@@ -47,7 +87,7 @@ public class MyProgram
         //}
 
     }
-    void BackWards()
+    void GoingLeft()
     {
         for (int i = 0; i < stageLength; i++)
         {
