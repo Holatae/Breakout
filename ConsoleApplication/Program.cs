@@ -9,7 +9,6 @@ namespace ConsoleApplication
             Console.CursorVisible = false;
             MyProgram myProgram;
             myProgram = new MyProgram();
-            myProgram.Draw();
             myProgram.Run();
             
         }
