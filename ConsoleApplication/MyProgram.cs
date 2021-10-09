@@ -12,6 +12,8 @@ namespace ConsoleApplication
         private const int StageHeight = 19;
         private const int PlayerSize = 2;
 
+        private int blockRows = 2;
+
         bool isRunning = true;
         Player player = new Player(StageWidth, StageHeight, PlayerSize);
         public void Run()
@@ -62,7 +64,9 @@ namespace ConsoleApplication
                 {
                     tempY = 1;
                 }
-
+                
+                
+                
                 if (_posY > StageHeight + 2)
                 {
                     tempY = 1;
