@@ -10,9 +10,10 @@ namespace ConsoleApplication
 
         private const int StageWidth = 15;
         private const int StageHeight = 19;
+        private const int PlayerSize = 2;
 
         bool isRunning = true;
-        Player player = new Player(StageWidth, StageHeight);
+        Player player = new Player(StageWidth, StageHeight, PlayerSize);
         public void Run()
         {
             Draw();
@@ -45,14 +46,16 @@ namespace ConsoleApplication
                 {
                     tempX = 1;
                 }
-                
-                //TODO REMEMBER THAT 2 SHOULD BE 1 IN THE FUTURE
-                
+
                 if (_posY == StageHeight - 1)
                 {
-                    if (player.posX == _posX)
+                    //Checks collision for more all the player blocks
+                    for (int i = 0; i < player.size; i++)
                     {
-                        tempY = -1;
+                        if (player.posX == _posX || player.posX + i == _posX)
+                        {
+                            tempY = -1;
+                        }
                     }
                 }
                 else if(_posY == 1)
