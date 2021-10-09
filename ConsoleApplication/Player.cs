@@ -37,7 +37,7 @@ namespace ConsoleApplication
                     }
                     break;
                 case 1:
-                    if(posX + 1 >= stageWidth){break;}
+                    if(posX + size >= stageWidth){break;}
                     Console.SetCursorPosition(posX, posY);
                     for (int i = 0; i < size; i++)
                     {
