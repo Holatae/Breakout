@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 
 namespace ConsoleApplication
@@ -16,10 +17,12 @@ namespace ConsoleApplication
 
         bool isRunning = true;
         Player player = new Player(StageWidth, StageHeight, PlayerSize);
+        private BreakableBlock[] blocks;
         public void Run()
         {
             Console.Clear();
             Draw();
+            InitializationOfBreakablesBlocks();
             Thread playerThread = new Thread(() => player.InputChecker());
             playerThread.Start();
             while(isRunning)
@@ -197,5 +200,12 @@ namespace ConsoleApplication
             }
         }
 
+        private void InitializationOfBreakablesBlocks()
+        {
+            for (int i = 0; i < StageWidth - 1; i++)
+            {
+                blocks.Append(new BreakableBlock(i, 1, 1));
+            }
+        }
     }
 }
