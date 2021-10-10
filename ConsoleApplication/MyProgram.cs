@@ -18,6 +18,7 @@ namespace ConsoleApplication
         Player player = new Player(StageWidth, StageHeight, PlayerSize);
         public void Run()
         {
+            Console.Clear();
             Draw();
             Thread playerThread = new Thread(() => player.InputChecker());
             playerThread.Start();
