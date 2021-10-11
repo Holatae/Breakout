@@ -71,8 +71,11 @@ namespace ConsoleApplication
                 {
                     foreach (var block in blocks)
                     {
-                        if (_posX + 1 == block.PosX && _posY == block.PosY)
+                        if (_posX + tempX == block.PosX && _posY + tempY == block.PosY)
                         {
+                            Console.SetCursorPosition(block.PosX, block.PosY);
+                            Console.Write(" ");
+                            block.Destroy();
                             tempY = 1;
                         }
                     }
