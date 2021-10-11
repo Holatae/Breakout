@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace ConsoleApplication
 {
@@ -17,7 +18,7 @@ namespace ConsoleApplication
 
         bool isRunning = true;
         Player player = new Player(StageWidth, StageHeight, PlayerSize);
-        private BreakableBlock[] blocks = new BreakableBlock[15];
+        private List<BreakableBlock> blocks = new List<BreakableBlock>();
         public void Run()
         {
             Console.Clear();
@@ -35,8 +36,8 @@ namespace ConsoleApplication
         {
             bool isPlaying = true;
 
-            int tempX = 1;
-            int tempY = 1;
+            int tempX = 2;
+            int tempY = 2;
             while (isPlaying)
             {
                 Console.SetCursorPosition(_posX, _posY);
@@ -52,7 +53,7 @@ namespace ConsoleApplication
                 {
                     tempX = 1;
                 }
-
+                
                 if (_posY == StageHeight - 1)
                 {
                     //Checks collision for more all the player blocks
@@ -64,13 +65,25 @@ namespace ConsoleApplication
                         }
                     }
                 }
-                else if(_posY == 1)
+                
+                //if thing
+                if(_posY >= 2)
+                {
+                    foreach (var block in blocks)
+                    {
+                        if (_posX + 1 == block.PosX && _posY == block.PosY)
+                        {
+                            tempY = 1;
+                        }
+                    }
+                }
+
+                if (_posY == 1)
                 {
                     tempY = 1;
                 }
-                
-                
-                
+
+                //If you loose
                 if (_posY > StageHeight + 2)
                 {
                     tempY = 1;
@@ -204,7 +217,7 @@ namespace ConsoleApplication
         {
             for (int i = 0; i < StageWidth - 1; i++)
             {
-                blocks.Append(new BreakableBlock(i + 1, 1, 1));
+                blocks.Add(new BreakableBlock(i, 1, 1));
             }
         }
     }
