@@ -17,7 +17,7 @@ namespace ConsoleApplication
 
         bool isRunning = true;
         Player player = new Player(StageWidth, StageHeight, PlayerSize);
-        private BreakableBlock[] blocks;
+        private BreakableBlock[] blocks = new BreakableBlock[15];
         public void Run()
         {
             Console.Clear();
@@ -204,7 +204,7 @@ namespace ConsoleApplication
         {
             for (int i = 0; i < StageWidth - 1; i++)
             {
-                blocks.Append(new BreakableBlock(i, 1, 1));
+                blocks.Append(new BreakableBlock(i + 1, 1, 1));
             }
         }
     }
