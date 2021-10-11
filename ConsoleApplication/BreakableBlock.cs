@@ -21,7 +21,7 @@ namespace ConsoleApplication
             this.posY = posY;
             this.row = row;
             Console.SetCursorPosition(this.posX, this.posY);
-            Console.Write($"{ConsoleColor.Blue}@");
+            Console.Write("$");
         }
     }
 }
