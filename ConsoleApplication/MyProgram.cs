@@ -54,12 +54,12 @@ namespace ConsoleApplication
                     tempX = 1;
                 }
                 
-                if (_posY == StageHeight - 1)
+                if (_posY is >= StageHeight - 2 and < StageHeight)
                 {
                     //Checks collision for more all the player blocks
                     for (int i = 0; i < player.size; i++)
                     {
-                        if (player.posX == _posX || player.posX + i == _posX)
+                        if (player.posX + tempX == _posX || player.posX == _posX  || player.posX + tempX + i ==_posX|| player.posX + i == _posX)
                         {
                             tempY = -1;
                         }
@@ -203,8 +203,7 @@ namespace ConsoleApplication
             Console.SetCursorPosition(StageWidth / 2 + 1, StageHeight - 1);
             for (int i = 0; i < player.size; i++)
             {
-            Console.Write("-");
-                
+                Console.Write("-");
             } 
             Console.SetCursorPosition(StageWidth / 2 + 1, StageHeight - 1);
 
