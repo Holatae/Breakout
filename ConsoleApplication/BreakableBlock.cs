@@ -7,7 +7,7 @@ namespace ConsoleApplication
         public int PosX { get; set; }
         public int PosY { get; set; }
         private int row;
-        private bool isBrocken = false;
+        public bool IsDestroyed { get; private set; }
 
         void BreakBlock()
         {
@@ -28,8 +28,7 @@ namespace ConsoleApplication
 
         public void Destroy()
         {
-            PosX = Int32.MaxValue;
-            PosY = Int32.MaxValue;
+            IsDestroyed = true;
         }
     }
 }

@@ -71,7 +71,7 @@ namespace ConsoleApplication
                 {
                     foreach (var block in blocks)
                     {
-                        if (_posX + tempX == block.PosX && _posY + tempY == block.PosY)
+                        if (_posX + tempX == block.PosX && _posY + tempY == block.PosY && !block.IsDestroyed)
                         {
                             Console.SetCursorPosition(block.PosX, block.PosY);
                             Console.Write(" ");
@@ -201,7 +201,11 @@ namespace ConsoleApplication
             
             //Draw player
             Console.SetCursorPosition(StageWidth / 2 + 1, StageHeight - 1);
+            for (int i = 0; i < player.size; i++)
+            {
             Console.Write("-");
+                
+            } 
             Console.SetCursorPosition(StageWidth / 2 + 1, StageHeight - 1);
 
             y = 0;
