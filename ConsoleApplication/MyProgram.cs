@@ -57,13 +57,13 @@ namespace ConsoleApplication
                 if (_posY is >= StageHeight - 2 and < StageHeight)
                 {
                     //Checks collision for more all the player blocks
-                    for (int i = 0; i < player.size; i++)
+                    for (int i = 0; i < player.Size; i++)
                     {
-                        if (player.posX + tempX == _posX || player.posX == _posX  || player.posX + tempX + i ==_posX|| player.posX + i == _posX)
+                        if (player.PosX + tempX == _posX || player.PosX == _posX  || player.PosX + tempX + i ==_posX|| player.PosX + i == _posX)
                         {
                             tempY = -1;
-                            Console.SetCursorPosition(player.posX, player.posY);
-                            for (int j = 0; j < player.size; j++)
+                            Console.SetCursorPosition(player.PosX, player.PosY);
+                            for (int j = 0; j < player.Size; j++)
                             {
                                 Console.Write("-");
                             }
@@ -206,7 +206,7 @@ namespace ConsoleApplication
             
             //Draw player
             Console.SetCursorPosition(StageWidth / 2 + 1, StageHeight - 1);
-            for (int i = 0; i < player.size; i++)
+            for (int i = 0; i < player.Size; i++)
             {
                 Console.Write("-");
             } 
@@ -226,9 +226,14 @@ namespace ConsoleApplication
 
         private void InitializationOfBreakablesBlocks()
         {
-            for (int i = 0; i < StageWidth - 1; i++)
+            //Generatre Rows
+            for (int i = 1; i <= blockRows; i++)
             {
-                blocks.Add(new BreakableBlock(i, 1, 1));
+                //generate each block on row
+                for (int j = 0; j < StageWidth - 1; j++)
+                {
+                    blocks.Add(new BreakableBlock(j, i));
+                }
             }
         }
     }

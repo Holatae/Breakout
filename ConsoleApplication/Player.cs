@@ -4,49 +4,49 @@ namespace ConsoleApplication
 {
     public class Player
     {
-        public int posX { get; set; }
-        public int posY { get; set; }
-        private int stageWidth;
-        public int size;
+        public int PosX { get; private set; }
+        public int PosY { get; }
+        private readonly int _stageWidth;
+        public readonly int Size;
 
         public Player(int stageWidth, int stageHeight, int size)
         {
-            this.stageWidth = stageWidth;
-            posX = stageWidth / 2 + 1;
-            posY = stageHeight - 1;
-            this.size = size;
+            _stageWidth = stageWidth;
+            PosX = stageWidth / 2 + 1;
+            PosY = stageHeight - 1;
+            Size = size;
         }
 
         //If direction is 0, move left, if direction is 1 move right
-        void Move(int direction)
+        private void Move(int direction)
         {
             switch (direction)
             {
                 case 0:
-                    if(posX - 1 <= 0){break;}
-                    Console.SetCursorPosition(posX, posY);
-                    for (int i = 0; i < size; i++)
+                    if(PosX - 1 <= 0){break;}
+                    Console.SetCursorPosition(PosX, PosY);
+                    for (int i = 0; i < Size; i++)
                     {
                         Console.Write(" ");
                     }
-                    posX += -1;
-                    Console.SetCursorPosition(posX, posY);
-                    for (int i = 0; i < size; i++)
+                    PosX += -1;
+                    Console.SetCursorPosition(PosX, PosY);
+                    for (int i = 0; i < Size; i++)
                     {
                         Console.Write("-");
                     }
                     break;
                 case 1:
-                    if(posX + size >= stageWidth){break;}
-                    Console.SetCursorPosition(posX, posY);
-                    for (int i = 0; i < size; i++)
+                    if(PosX + Size >= _stageWidth){break;}
+                    Console.SetCursorPosition(PosX, PosY);
+                    for (int i = 0; i < Size; i++)
                     {
                         Console.Write(" ");
                     }
-                    posX += 1;
-                    Console.SetCursorPosition(posX, posY);
+                    PosX += 1;
+                    Console.SetCursorPosition(PosX, PosY);
 
-                    for (int i = 0; i < size; i++)
+                    for (int i = 0; i < Size; i++)
                     {
                         Console.Write("-");
                     }

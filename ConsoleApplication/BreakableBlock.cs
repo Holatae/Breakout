@@ -4,9 +4,8 @@ namespace ConsoleApplication
 {
     public class BreakableBlock
     {
-        public int PosX { get; set; }
-        public int PosY { get; set; }
-        private int row;
+        public int PosX { get; }
+        public int PosY { get; } //AKA the row the block is on
         public bool IsDestroyed { get; private set; }
 
         void BreakBlock()
@@ -15,17 +14,16 @@ namespace ConsoleApplication
             Console.Write(" ");
         }
 
-        public BreakableBlock(int posX, int posY, int row)
+        public BreakableBlock(int posX, int posY)
         {
             PosX = posX;
             PosY = posY;
-            this.row = row;
             Console.SetCursorPosition(this.PosX + 1, this.PosY);
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("$");
             Console.ForegroundColor = ConsoleColor.Black;
         }
-
+        
         public void Destroy()
         {
             IsDestroyed = true;
