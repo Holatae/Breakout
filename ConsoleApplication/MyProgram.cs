@@ -62,6 +62,11 @@ namespace ConsoleApplication
                         if (player.posX + tempX == _posX || player.posX == _posX  || player.posX + tempX + i ==_posX|| player.posX + i == _posX)
                         {
                             tempY = -1;
+                            Console.SetCursorPosition(player.posX, player.posY);
+                            for (int j = 0; j < player.size; j++)
+                            {
+                                Console.Write("-");
+                            }
                         }
                     }
                 }

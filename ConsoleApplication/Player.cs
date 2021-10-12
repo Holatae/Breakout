@@ -4,8 +4,8 @@ namespace ConsoleApplication
 {
     public class Player
     {
-        public int posX;
-        private int posY;
+        public int posX { get; set; }
+        public int posY { get; set; }
         private int stageWidth;
         public int size;
 
