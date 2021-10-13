@@ -7,8 +7,8 @@ namespace ConsoleApplication
 {
     public class MyProgram
     {
-        private int _posX = 1;
-        private int _posY = 1;
+        private int _posX;
+        private int _posY;
 
         private const int StageWidth = 15;
         private const int StageHeight = 19;
@@ -24,7 +24,13 @@ namespace ConsoleApplication
             Console.Clear();
             Draw();
             InitializationOfBreakablesBlocks();
-            Thread playerThread = new Thread(() => player.InputChecker());
+            
+            //Player starting position
+            Random random = new Random();
+            _posX = random.Next(1, StageWidth - 1);
+            _posY = blockRows + 1;
+            
+            Thread playerThread = new Thread(start: () => player.InputChecker());
             playerThread.Start();
             while(isRunning)
             {
@@ -59,7 +65,9 @@ namespace ConsoleApplication
                     //Checks collision for more all the player blocks
                     for (int i = 0; i < player.Size; i++)
                     {
-                        if (player.PosX + tempX == _posX || player.PosX == _posX  || player.PosX + tempX + i ==_posX|| player.PosX + i == _posX)
+                        // Checks if player is hitting ball or is going to hit the ball
+                        if (player.PosX + tempX == _posX || player.PosX == _posX  || 
+                            player.PosX + tempX + i ==_posX|| player.PosX + i == _posX)
                         {
                             tempY = -1;
                             Console.SetCursorPosition(player.PosX, player.PosY);
@@ -71,8 +79,10 @@ namespace ConsoleApplication
                     }
                 }
                 
-                //if thing
-                if(_posY >= 2)
+                // if the ball comes close to the block, the game checks every
+                // frame if the ball hits one of the blocks. If it hit
+                // then destroy the block and change the balls direction.
+                if(_posY >= blockRows + 1)
                 {
                     foreach (var block in blocks)
                     {
@@ -91,13 +101,14 @@ namespace ConsoleApplication
                     tempY = 1;
                 }
 
-                //If you loose
+                //If you loose than reset the ball
                 if (_posY > StageHeight + 2)
                 {
+                    Random random = new Random();
                     tempY = 1;
                     tempX = 1;
-                    _posX = 1;
-                    _posY = 1;
+                    _posX = random.Next(1 ,StageWidth - 1);
+                    _posY = blockRows + 1;
                 }
                 #endregion
             
