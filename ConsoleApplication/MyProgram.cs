@@ -14,6 +14,8 @@ namespace ConsoleApplication
         private const int StageHeight = 19;
         private const int PlayerSize = 2;
 
+        private bool hasDrawenedStage = false;
+
         private int blockRows = 2;
 
         bool isRunning = true;
@@ -66,11 +68,11 @@ namespace ConsoleApplication
                     for (int i = 0; i < player.Size; i++)
                     {
                         // Checks if player is hitting ball or is going to hit the ball
-                        if (player.PosX + tempX == _posX || player.PosX == _posX  || 
-                            player.PosX + tempX + i ==_posX|| player.PosX + i == _posX)
+                        if (player.posX + tempX == _posX || player.posX == _posX  || 
+                            player.posX + tempX + i ==_posX|| player.posX + i == _posX)
                         {
                             tempY = -1;
-                            Console.SetCursorPosition(player.PosX, player.PosY);
+                            Console.SetCursorPosition(player.posX, player.posY);
                             for (int j = 0; j < player.Size; j++)
                             {
                                 Console.Write("-");
@@ -179,59 +181,73 @@ namespace ConsoleApplication
 
         private void Draw()
         {
-        
-            //XY === Here
-            int x = StageWidth;
-            int y = 0;
-            //Right wall
-            Console.SetCursorPosition(x, y);
-            for (int i = 0; i < StageHeight; i++)
+            //TODO should be called every frame and should draw player
+            if (hasDrawenedStage)
             {
-                Console.WriteLine("@");
-                y += 1;
+                //XY === Here
+                int x = StageWidth;
+                int y = 0;
+                //Right wall
                 Console.SetCursorPosition(x, y);
+                for (int i = 0; i < StageHeight; i++)
+                {
+                    Console.WriteLine("@");
+                    y += 1;
+                    Console.SetCursorPosition(x, y);
 
-            }
+                }
 
-            //Left wall
-            x = 0;
-            y = 0;
-            Console.SetCursorPosition(x, y);
-            for (int i = 0; i < StageHeight; i++)
-            {
-                Console.WriteLine("@");
-                y += 1;
+                //Left wall
+                x = 0;
+                y = 0;
                 Console.SetCursorPosition(x, y);
-            }
+                for (int i = 0; i < StageHeight; i++)
+                {
+                    Console.WriteLine("@");
+                    y += 1;
+                    Console.SetCursorPosition(x, y);
+                }
 
-            // y = StageHeight - 1;
-            // x = 1;
-            // //Floor
-            // Console.SetCursorPosition(x, y);
-            // for (int i = 0; i < StageWidth - 1; i++)
-            // {
-            //     Console.WriteLine("-");
-            //     x += 1;
-            //     Console.SetCursorPosition(x, y);
-            // }
+                // y = StageHeight - 1;
+                // x = 1;
+                // //Floor
+                // Console.SetCursorPosition(x, y);
+                // for (int i = 0; i < StageWidth - 1; i++)
+                // {
+                //     Console.WriteLine("-");
+                //     x += 1;
+                //     Console.SetCursorPosition(x, y);
+                // }
+
+                //Draw player
+                Console.SetCursorPosition(StageWidth / 2 + 1, StageHeight - 1);
+                for (int i = 0; i < player.Size; i++)
+                {
+                    Console.Write("-");
+                }
+
+                Console.SetCursorPosition(StageWidth / 2 + 1, StageHeight - 1);
+
+                y = 0;
+                x = 1;
+                //Roof
+                Console.SetCursorPosition(x, y);
+                for (int i = 0; i < StageWidth - 1; i++)
+                {
+                    Console.WriteLine("-");
+                    x += 1;
+                    Console.SetCursorPosition(x, y);
+                }
+            }
             
-            //Draw player
-            Console.SetCursorPosition(StageWidth / 2 + 1, StageHeight - 1);
-            for (int i = 0; i < player.Size; i++)
+            //DRAW PLAYER
+            if (player.hasMoved)
             {
-                Console.Write("-");
-            } 
-            Console.SetCursorPosition(StageWidth / 2 + 1, StageHeight - 1);
-
-            y = 0;
-            x = 1;
-            //Roof
-            Console.SetCursorPosition(x, y);
-            for (int i = 0; i < StageWidth - 1; i++)
-            {
-                Console.WriteLine("-");
-                x += 1;
-                Console.SetCursorPosition(x, y);
+                Console.SetCursorPosition(player.posX, player.posY);
+                for (int i = 0; i < player.Size; i++)
+                {
+                    Console.Write("-");
+                }
             }
         }
 

@@ -8,6 +8,8 @@ namespace ConsoleApplication
         public int PosY { get; } //AKA the row the block is on
         public bool IsDestroyed { get; private set; }
 
+
+
         void BreakBlock()
         {
             Console.SetCursorPosition(PosX, PosY);
