@@ -15,7 +15,7 @@ namespace ConsoleApplication
                 Console.Write("@");
             }
 
-            Console.SetCursorPosition(0, Console.WindowHeight);
+            Console.SetCursorPosition(0, Console.WindowHeight - 1);
             for (int i = 0; i < Console.WindowWidth; i++)
             {
                 Console.Write("@");
@@ -31,7 +31,8 @@ namespace ConsoleApplication
 
             if (Console.ReadKey().Key == ConsoleKey.S)
             {
-                // TODO start game
+                MyProgram game = new MyProgram();
+                game.Run();
             }
             else if (Console.ReadKey().Key == ConsoleKey.Q)
             {

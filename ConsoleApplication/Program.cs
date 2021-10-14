@@ -6,6 +6,9 @@ namespace ConsoleApplication
     {
         static void Main(string[] args)
         {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.Clear();
+            Console.CursorVisible = false;
             MainMenu menu = new MainMenu();
             menu.Show();
             // Console.CursorVisible = false;

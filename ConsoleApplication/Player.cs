@@ -22,35 +22,44 @@ namespace ConsoleApplication
         {
             switch (direction)
             {
+                // Left
                 case 0:
-                    if(PosX - 1 <= 0){break;}
-                    Console.SetCursorPosition(PosX, PosY);
-                    for (int i = 0; i < Size; i++)
+                {
+                    if (PosX - 1 <= 0)
                     {
-                        Console.Write(" ");
+                        break;
                     }
-                    PosX += -1;
-                    Console.SetCursorPosition(PosX, PosY);
-                    for (int i = 0; i < Size; i++)
-                    {
-                        Console.Write("-");
-                    }
-                    break;
-                case 1:
-                    if(PosX + Size >= _stageWidth){break;}
-                    Console.SetCursorPosition(PosX, PosY);
-                    for (int i = 0; i < Size; i++)
-                    {
-                        Console.Write(" ");
-                    }
-                    PosX += 1;
-                    Console.SetCursorPosition(PosX, PosY);
 
-                    for (int i = 0; i < Size; i++)
-                    {
-                        Console.Write("-");
-                    }
+                    PosX -= 1;
                     break;
+                }
+                
+                // Right
+                case 1:
+                {
+                    if (PosX + Size >= _stageWidth)
+                    {
+                        break;
+                    }
+
+                    PosX += 1;
+                    break;
+                }
+                
+                default:
+                    break;
+            }
+            // Removes player
+            Console.SetCursorPosition(PosX, PosY);
+            for (int i = 0; i < Size; i++)
+            {
+                Console.Write(" ");
+            }
+            //Writes Player
+            Console.SetCursorPosition(PosX, PosY);
+            for (int i = 0; i < Size; i++)
+            {
+                Console.Write("-");
             }
         }
 
@@ -67,6 +76,11 @@ namespace ConsoleApplication
                 if (Console.ReadKey().Key == ConsoleKey.LeftArrow)
                 {
                     Move(0);
+                }
+
+                if (Console.ReadKey().Key == ConsoleKey.Escape)
+                {
+                    Environment.Exit(1);
                 }
             }
         }

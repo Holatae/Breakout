@@ -30,7 +30,7 @@ namespace ConsoleApplication
             _posX = random.Next(1, StageWidth - 1);
             _posY = blockRows + 1;
             
-            Thread playerThread = new Thread(start: () => player.InputChecker());
+            Thread playerThread = new Thread( () => player.InputChecker());
             playerThread.Start();
             while(isRunning)
             {
@@ -42,8 +42,8 @@ namespace ConsoleApplication
         {
             bool isPlaying = true;
 
-            int tempX = 2;
-            int tempY = 2;
+            int tempX = 1;
+            int tempY = 1;
             while (isPlaying)
             {
                 Console.SetCursorPosition(_posX, _posY);
@@ -119,7 +119,7 @@ namespace ConsoleApplication
                 //Moves the ball
                 Console.SetCursorPosition(_posX, _posY );
                 Console.Write("@");
-                System.Threading.Thread.Sleep(200);
+                Thread.Sleep(300);
             
                 //removes the old ball
                 Console.SetCursorPosition(_posX, _posY );
