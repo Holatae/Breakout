@@ -180,7 +180,7 @@ namespace ConsoleApplication
         private void Draw()
         {
         
-            //XY === HÄR
+            //XY === Here
             int x = StageWidth;
             int y = 0;
             //Right wall
