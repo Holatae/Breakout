@@ -14,6 +14,8 @@ namespace ConsoleApplication
         private const int StageHeight = 19;
         private const int PlayerSize = 2;
 
+        private int speed = 300;
+
         private bool hasDrawenedStage = false;
 
         private int blockRows = 2;
@@ -24,7 +26,6 @@ namespace ConsoleApplication
         public void Run()
         {
             Console.Clear();
-            Draw();
             InitializationOfBreakablesBlocks();
             
             //Player starting position
@@ -33,7 +34,9 @@ namespace ConsoleApplication
             _posY = blockRows + 1;
             
             Thread playerThread = new Thread( () => player.InputChecker());
+            Thread drawingThead = new Thread( () => Draw());
             playerThread.Start();
+            drawingThead.Start();
             while(isRunning)
             {
                 MoveBall();
@@ -121,7 +124,7 @@ namespace ConsoleApplication
                 //Moves the ball
                 Console.SetCursorPosition(_posX, _posY );
                 Console.Write("@");
-                Thread.Sleep(300);
+                Thread.Sleep(speed);
             
                 //removes the old ball
                 Console.SetCursorPosition(_posX, _posY );
@@ -182,71 +185,87 @@ namespace ConsoleApplication
         private void Draw()
         {
             //TODO should be called every frame and should draw player
-            if (hasDrawenedStage)
+            while (isRunning)
             {
-                //XY === Here
-                int x = StageWidth;
-                int y = 0;
-                //Right wall
-                Console.SetCursorPosition(x, y);
-                for (int i = 0; i < StageHeight; i++)
+                if (!hasDrawenedStage)
                 {
-                    Console.WriteLine("@");
-                    y += 1;
+                    #region Drawing stage
+
+                    
+                    
+                    //XY === Here
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    int x = StageWidth;
+                    int y = 0;
+                    //Right wall
                     Console.SetCursorPosition(x, y);
+                    for (int i = 0; i < StageHeight; i++)
+                    {
+                        Console.WriteLine("@");
+                        y += 1;
+                        Console.SetCursorPosition(x, y);
 
-                }
+                    }
 
-                //Left wall
-                x = 0;
-                y = 0;
-                Console.SetCursorPosition(x, y);
-                for (int i = 0; i < StageHeight; i++)
-                {
-                    Console.WriteLine("@");
-                    y += 1;
+                    //Left wall
+                    x = 0;
+                    y = 0;
                     Console.SetCursorPosition(x, y);
-                }
+                    for (int i = 0; i < StageHeight; i++)
+                    {
+                        Console.WriteLine("@");
+                        y += 1;
+                        Console.SetCursorPosition(x, y);
+                    }
 
-                // y = StageHeight - 1;
-                // x = 1;
-                // //Floor
-                // Console.SetCursorPosition(x, y);
-                // for (int i = 0; i < StageWidth - 1; i++)
-                // {
-                //     Console.WriteLine("-");
-                //     x += 1;
-                //     Console.SetCursorPosition(x, y);
-                // }
+                    // y = StageHeight - 1;
+                    // x = 1;
+                    // //Floor
+                    // Console.SetCursorPosition(x, y);
+                    // for (int i = 0; i < StageWidth - 1; i++)
+                    // {
+                    //     Console.WriteLine("-");
+                    //     x += 1;
+                    //     Console.SetCursorPosition(x, y);
+                    // }
 
-                //Draw player
-                Console.SetCursorPosition(StageWidth / 2 + 1, StageHeight - 1);
-                for (int i = 0; i < player.Size; i++)
-                {
-                    Console.Write("-");
-                }
+                    //Draw player
 
-                Console.SetCursorPosition(StageWidth / 2 + 1, StageHeight - 1);
+                    Console.SetCursorPosition(StageWidth / 2 + 1, StageHeight - 1);
 
-                y = 0;
-                x = 1;
-                //Roof
-                Console.SetCursorPosition(x, y);
-                for (int i = 0; i < StageWidth - 1; i++)
-                {
-                    Console.WriteLine("-");
-                    x += 1;
+                    y = 0;
+                    x = 1;
+                    //Roof
                     Console.SetCursorPosition(x, y);
+                    for (int i = 0; i < StageWidth - 1; i++)
+                    {
+                        Console.WriteLine("-");
+                        x += 1;
+                        Console.SetCursorPosition(x, y);
+                    }
+                    #endregion
+
+                    hasDrawenedStage = true;
                 }
-            }
             
-            //DRAW PLAYER
-            if (player.hasMoved)
-            {
-                Console.SetCursorPosition(player.posX, player.posY);
-                for (int i = 0; i < player.Size; i++)
+                //DRAW PLAYER
+                if (player.HasMoved)
                 {
-                    Console.Write("-");
+                    //Removes old player
+                    Console.SetCursorPosition(1, StageHeight - 1);
+                    for (int i = 0; i < StageWidth - 1; i++)
+                    {
+                        Console.Write(" ");
+                    }
+                
+                    // Writes new player
+                    Console.SetCursorPosition(player.posX, StageHeight - 1);
+                    for (int i = 0; i < player.Size; i++)
+                    {
+                        Console.Write("-");
+                    }
+
+                    player.HasMoved = false;
                 }
             }
         }

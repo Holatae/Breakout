@@ -31,7 +31,7 @@ namespace ConsoleApplication
 
             if (Console.ReadKey().Key == ConsoleKey.S)
             {
-                MyProgram game = new MyProgram();
+                NoTheards game = new NoTheards();
                 game.Run();
             }
             else if (Console.ReadKey().Key == ConsoleKey.Q)

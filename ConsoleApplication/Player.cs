@@ -6,14 +6,14 @@ namespace ConsoleApplication
     {
         public int posX { get; private set; }
         public int posY { get; }
-        private readonly int _stageWidth;
-        public readonly int Size;
+        private int stageWidth;
+        public int Size;
         
-        public bool hasMoved { get; }
+        public bool HasMoved { get; set; }
 
         public Player(int stageWidth, int stageHeight, int size)
         {
-            _stageWidth = stageWidth;
+            this.stageWidth = stageWidth;
             posX = stageWidth / 2 + 1;
             posY = stageHeight - 1;
             Size = size;
@@ -39,7 +39,7 @@ namespace ConsoleApplication
                 // Right
                 case 1:
                 {
-                    if (posX + Size >= _stageWidth)
+                    if (posX + Size >= stageWidth)
                     {
                         break;
                     }
@@ -52,17 +52,19 @@ namespace ConsoleApplication
                     break;
             }
             // Removes player
-            Console.SetCursorPosition(posX, posY);
-            for (int i = 0; i < Size; i++)
-            {
-                Console.Write(" ");
-            }
-            //Writes Player
-            Console.SetCursorPosition(posX, posY);
-            for (int i = 0; i < Size; i++)
-            {
-                Console.Write("-");
-            }
+            // Console.SetCursorPosition(posX, posY);
+            // for (int i = 0; i < Size; i++)
+            // {
+            //     Console.Write(" ");
+            // }
+            // //Writes Player
+            // Console.SetCursorPosition(posX, posY);
+            // for (int i = 0; i < Size; i++)
+            // {
+            //     Console.Write("-");
+            // }
+
+            HasMoved = true;
         }
 
         //Checks for input
