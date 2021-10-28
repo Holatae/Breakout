@@ -19,6 +19,7 @@ namespace ConsoleApplication
         bool isRunning = true;
         Player player = new Player(StageWidth, StageHeight, PlayerSize);
         private List<BreakableBlock> blocks = new List<BreakableBlock>();
+
         public void Run()
         {
             Console.BackgroundColor = ConsoleColor.White;
@@ -27,7 +28,7 @@ namespace ConsoleApplication
             InitializationOfBreakablesBlocks();
             Thread playerThread = new Thread(() => player.InputChecker());
             playerThread.Start();
-            while(isRunning)
+            while (isRunning)
             {
                 MoveBall();
             }
@@ -42,19 +43,20 @@ namespace ConsoleApplication
             while (isPlaying)
             {
                 Console.SetCursorPosition(ballPosX, ballPosY);
-            
+
                 //Check which direction the ball is going
+
                 #region CheckDirection
 
                 if (ballPosX == StageWidth - 1)
                 {
                     tempX = -1;
                 }
-                else if(ballPosX == 1)
+                else if (ballPosX == 1)
                 {
                     tempX = 1;
                 }
-                
+
                 if (ballPosY == StageHeight - 1)
                 {
                     //Checks collision for more all the player blocks
@@ -66,9 +68,9 @@ namespace ConsoleApplication
                         }
                     }
                 }
-                
+
                 //if ball is close to where the blocks should be, then calculate if blocks is near
-                if(ballPosY <= blockRows + 1)
+                if (ballPosY <= blockRows + 1)
                 {
                     foreach (var block in blocks)
                     {
@@ -95,27 +97,25 @@ namespace ConsoleApplication
                     ballPosX = 1;
                     ballPosY = 1;
                 }
+
                 #endregion
-            
+
                 //If going right X is 1 and left -1. From CheckDirection
                 ballPosX += tempX;
                 ballPosY += tempY;
-            
+
                 //Moves the ball
-                Console.SetCursorPosition(ballPosX, ballPosY );
+                Console.SetCursorPosition(ballPosX, ballPosY);
                 Console.Write("@");
                 Thread.Sleep(200);
-            
+
                 //removes the old ball
-                Console.SetCursorPosition(ballPosX, ballPosY );
+                Console.SetCursorPosition(ballPosX, ballPosY);
                 Console.Write(" ");
             }
         }
 
         #region oldCode
-
-    
-
 
         // void GoingRight()
         // {
@@ -144,7 +144,7 @@ namespace ConsoleApplication
         //     //}
         //
         // }
-    
+
         // void GoingLeft()
         // {
         //     for (int i = 0; i < stageLength; i++)
@@ -164,7 +164,6 @@ namespace ConsoleApplication
 
         private void Draw()
         {
-        
             //XY === HÄR
             int x = StageWidth;
             int y = 0;
@@ -175,7 +174,6 @@ namespace ConsoleApplication
                 Console.WriteLine("@");
                 y += 1;
                 Console.SetCursorPosition(x, y);
-
             }
 
             //Left wall
@@ -199,10 +197,15 @@ namespace ConsoleApplication
             //     x += 1;
             //     Console.SetCursorPosition(x, y);
             // }
-            
+
             //Draw player
             Console.SetCursorPosition(StageWidth / 2 + 1, StageHeight - 1);
-            Console.Write("-");
+            Console.ForegroundColor = ConsoleColor.Black;
+            for (int i = 0; i < PlayerSize; i++)
+            {
+                Console.Write("-");
+            }
+
             Console.SetCursorPosition(StageWidth / 2 + 1, StageHeight - 1);
 
             y = 0;
