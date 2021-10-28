@@ -2,13 +2,14 @@
 using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace ConsoleApplication
 {
     public class MyProgram
     {
-        private int ballPosX = 1;
-        private int ballPosY = 1;
+        private int ballPosX;
+        private int ballPosY;
 
         private const int StageWidth = 15;
         private const int StageHeight = 19;
@@ -22,6 +23,15 @@ namespace ConsoleApplication
 
         public void Run()
         {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Console.SetWindowSize(StageWidth, StageHeight + 5);
+            }
+
+            Random random = new Random();
+            ballPosX = random.Next(1, StageWidth);
+            ballPosY = blockRows + 2;
+
             Console.BackgroundColor = ConsoleColor.White;
             Console.Clear();
             Draw();
@@ -38,8 +48,8 @@ namespace ConsoleApplication
         {
             bool isPlaying = true;
 
-            int tempX = 2;
-            int tempY = 2;
+            int tempX = 1;
+            int tempY = 1;
             while (isPlaying)
             {
                 Console.SetCursorPosition(ballPosX, ballPosY);
@@ -56,6 +66,7 @@ namespace ConsoleApplication
                 {
                     tempX = 1;
                 }
+
                 // Checks if ball is in the player
                 if (ballPosY == player.posY)
                 {
@@ -68,6 +79,7 @@ namespace ConsoleApplication
                         }
                     }
                 }
+
                 // Checks if ball is Above Player with 1
                 // Check where the player is and maybe it will hit
                 if (ballPosY + 1 == player.posY)
@@ -106,8 +118,10 @@ namespace ConsoleApplication
                 {
                     tempY = 1;
                     tempX = 1;
-                    ballPosX = 1;
-                    ballPosY = 1;
+
+                    Random random = new Random();
+                    ballPosX = random.Next(1, StageWidth);
+                    ballPosY = blockRows + 2;
                 }
 
                 #endregion
