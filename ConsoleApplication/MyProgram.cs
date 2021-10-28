@@ -56,13 +56,25 @@ namespace ConsoleApplication
                 {
                     tempX = 1;
                 }
-
-                if (ballPosY == StageHeight - 1)
+                // Checks if ball is in the player
+                if (ballPosY == player.posY)
                 {
                     //Checks collision for more all the player blocks
                     for (int i = 0; i < player.size; i++)
                     {
                         if (player.posX == ballPosX || player.posX + i == ballPosX)
+                        {
+                            tempY = -1;
+                        }
+                    }
+                }
+                // Checks if ball is Above Player with 1
+                // Check where the player is and maybe it will hit
+                if (ballPosY + 1 == player.posY)
+                {
+                    for (int i = 0; i < player.size; i++)
+                    {
+                        if (ballPosX + tempX == player.posX || ballPosX + tempX == player.posX + i)
                         {
                             tempY = -1;
                         }
