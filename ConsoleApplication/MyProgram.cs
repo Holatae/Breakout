@@ -234,9 +234,12 @@ namespace ConsoleApplication
 
         private void InitializationOfBreakablesBlocks()
         {
-            for (int i = 0; i < StageWidth - 1; i++)
+            for (int i = 1; i <= blockRows; i++)
             {
-                blocks.Add(new BreakableBlock(i, 1, 1));
+                for (int j = 0; j < StageWidth - 1; j++)
+                {
+                    blocks.Add(new BreakableBlock(j, i, 1));
+                }
             }
         }
     }
