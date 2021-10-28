@@ -7,8 +7,8 @@ namespace ConsoleApplication
 {
     public class MyProgram
     {
-        private int _posX = 1;
-        private int _posY = 1;
+        private int ballPosX = 1;
+        private int ballPosY = 1;
 
         private const int StageWidth = 15;
         private const int StageHeight = 19;
@@ -21,6 +21,7 @@ namespace ConsoleApplication
         private List<BreakableBlock> blocks = new List<BreakableBlock>();
         public void Run()
         {
+            Console.BackgroundColor = ConsoleColor.White;
             Console.Clear();
             Draw();
             InitializationOfBreakablesBlocks();
@@ -40,38 +41,38 @@ namespace ConsoleApplication
             int tempY = 2;
             while (isPlaying)
             {
-                Console.SetCursorPosition(_posX, _posY);
+                Console.SetCursorPosition(ballPosX, ballPosY);
             
                 //Check which direction the ball is going
                 #region CheckDirection
 
-                if (_posX == StageWidth - 1)
+                if (ballPosX == StageWidth - 1)
                 {
                     tempX = -1;
                 }
-                else if(_posX == 1)
+                else if(ballPosX == 1)
                 {
                     tempX = 1;
                 }
                 
-                if (_posY == StageHeight - 1)
+                if (ballPosY == StageHeight - 1)
                 {
                     //Checks collision for more all the player blocks
                     for (int i = 0; i < player.size; i++)
                     {
-                        if (player.posX == _posX || player.posX + i == _posX)
+                        if (player.posX == ballPosX || player.posX + i == ballPosX)
                         {
                             tempY = -1;
                         }
                     }
                 }
                 
-                //if thing
-                if(_posY >= 2)
+                //if ball is close to where the blocks should be, then calculate if blocks is near
+                if(ballPosY <= blockRows + 1)
                 {
                     foreach (var block in blocks)
                     {
-                        if (_posX + tempX == block.PosX && _posY + tempY == block.PosY)
+                        if (ballPosX + tempX == block.PosX && ballPosY + tempY == block.PosY)
                         {
                             Console.SetCursorPosition(block.PosX, block.PosY);
                             Console.Write(" ");
@@ -81,32 +82,32 @@ namespace ConsoleApplication
                     }
                 }
 
-                if (_posY == 1)
+                if (ballPosY == 1)
                 {
                     tempY = 1;
                 }
 
                 //If you loose
-                if (_posY > StageHeight + 2)
+                if (ballPosY > StageHeight + 2)
                 {
                     tempY = 1;
                     tempX = 1;
-                    _posX = 1;
-                    _posY = 1;
+                    ballPosX = 1;
+                    ballPosY = 1;
                 }
                 #endregion
             
                 //If going right X is 1 and left -1. From CheckDirection
-                _posX += tempX;
-                _posY += tempY;
+                ballPosX += tempX;
+                ballPosY += tempY;
             
                 //Moves the ball
-                Console.SetCursorPosition(_posX, _posY );
+                Console.SetCursorPosition(ballPosX, ballPosY );
                 Console.Write("@");
-                System.Threading.Thread.Sleep(200);
+                Thread.Sleep(200);
             
                 //removes the old ball
-                Console.SetCursorPosition(_posX, _posY );
+                Console.SetCursorPosition(ballPosX, ballPosY );
                 Console.Write(" ");
             }
         }
